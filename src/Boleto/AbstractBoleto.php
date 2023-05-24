@@ -19,6 +19,8 @@ use Illuminate\Support\Str;
  */
 abstract class AbstractBoleto implements BoletoContract
 {
+    public $linhadigitavel;
+    public $codigobarra;
 
     const SITUACAO_REJEITADO = 'rejeitado';
     const SITUACAO_ABERTO = 'aberto';
@@ -1456,6 +1458,15 @@ abstract class AbstractBoleto implements BoletoContract
         return $this->getNossoNumero();
     }
 
+    public function meuNumeroDigitavel($data)
+    {       
+        return $this->linhadigitavel = $data;
+
+    }
+    public function meuCodigoDebarra($data)
+    {
+        return $this->codigobarra = $data;
+    }
     /**
      * Método onde o Boleto deverá gerar o Nosso Número.
      *
@@ -1529,24 +1540,15 @@ abstract class AbstractBoleto implements BoletoContract
      */
     public function getCodigoBarras()
     {
-        if (!empty($this->campoCodigoBarras)) {
-            return $this->campoCodigoBarras;
+        if (!empty($this->codigobarra)) {
+            return $this->codigobarra;
         }
 
         if (!$this->isValid($messages)) {
             throw new \Exception('Campos requeridos pelo banco, aparentam estar ausentes ' . $messages);
         }
-
-        $codigo = Util::numberFormatGeral($this->getCodigoBanco(), 3)
-            . $this->getMoeda()
-            . Util::fatorVencimento($this->getDataVencimento())
-            . Util::numberFormatGeral($this->getValor(), 10)
-            . $this->getCampoLivre();
-
-        $resto = Util::modulo11($codigo, 2, 9, 0);
-        $dv = (in_array($resto, [0, 10, 11])) ? 1 : $resto;
-
-        return $this->campoCodigoBarras = substr($codigo, 0, 4) . $dv . substr($codigo, 4);
+        
+        return $this->codigobarra ;
     }
 
     /**
@@ -1572,8 +1574,8 @@ abstract class AbstractBoleto implements BoletoContract
      */
     public function getLinhaDigitavel()
     {
-        if (!empty($this->campoLinhaDigitavel)) {
-            return $this->campoLinhaDigitavel;
+        if (!empty($this->linhadigitavel)) {
+            return $this->linhadigitavel;
         }
 
         $codigo = $this->getCodigoBarras();
@@ -1594,7 +1596,8 @@ abstract class AbstractBoleto implements BoletoContract
 
         $s5 = substr($codigo, 5, 14);
 
-        return $this->campoLinhaDigitavel = sprintf('%s %s %s %s %s', $s1, $s2, $s3, $s4, $s5);
+     
+        return $this->linhadigitavel = sprintf('%s %s %s %s %s', $s1, $s2, $s3, $s4, $s5);
     }
 
     /**
