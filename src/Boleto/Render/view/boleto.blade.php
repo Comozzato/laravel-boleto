@@ -4,6 +4,7 @@
     @foreach($boletos as $i => $boleto)
         @php extract($boleto, EXTR_OVERWRITE); @endphp
         @if($mostrar_instrucoes)
+       
             <div class="noprint info">
                 <h2>Instruções de Impressão</h2>
                 <ul>
@@ -24,11 +25,14 @@
                         <li>Caso tenha problemas ao imprimir, copie a sequencia numérica abaixo e pague no caixa
                             eletrônico ou no internet banking:
                         </li>
+                        
                     @endforelse
                 </ul>
-                <span class="header">Linha Digitável: {{ $linha_digitavel }}</span>
+                <span class="header" style="white-space: nowrap;">Linha Digitável: {{ $linha_digitavel }}</span>
                 <span class="header">Número: {{ $numero }}</span>
                 {!! $valor ? '<span class="header">Valor: R$' . $valor . '</span>' : '' !!}
+                <br>
+                <div class="buttonimpressao" style="justify-content: flex-end; display: flex;"> <button onclick="window.print()">Imprimir</button></div>
                 <br>
             </div>
         @endif

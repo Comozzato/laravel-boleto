@@ -178,6 +178,6 @@
             {!! $codigo_barras !!}
         </td>
     </tr>
-
+   
     </tbody>
 </table>
