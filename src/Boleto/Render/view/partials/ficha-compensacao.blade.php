@@ -96,7 +96,7 @@
     </tr>
     <tr>
         <td colspan="{{ isset($pix_qrcode) ? 6 : 7 }}">
-            <div class="titulo">Instruções de responsabilidade do beneficiário. Qualquer dúvida sobre este boleto, contate o beneficiário</div>
+            <div class="titulo"Qualquer dúvida sobre este boleto, contate o beneficiário em https://cespec.com.br/contato/</div>
         </td>
         @if(isset($pix_qrcode))
             <td colspan="1" rowspan="5">
