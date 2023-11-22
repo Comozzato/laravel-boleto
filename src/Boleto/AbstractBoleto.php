@@ -975,8 +975,8 @@ abstract class AbstractBoleto implements BoletoContract
      */
     public function addDescricaoDemonstrativo($descricaoDemonstrativo)
     {
-        if (count($this->getDescricaoDemonstrativo()) > 5) {
-            throw new \Exception('Atingido o máximo de 5 demonstrativos.');
+        if (count($this->getDescricaoDemonstrativo()) > 7) {
+            throw new \Exception('Atingido o máximo de 7 demonstrativos.');
         }
         array_push($this->descricaoDemonstrativo, $descricaoDemonstrativo);
 
@@ -993,8 +993,8 @@ abstract class AbstractBoleto implements BoletoContract
      */
     public function setDescricaoDemonstrativo(array $descricaoDemonstrativo)
     {
-        if (count($descricaoDemonstrativo) > 5) {
-            throw new \Exception('Máximo de 5 demonstrativos.');
+        if (count($descricaoDemonstrativo) > 7) {
+            throw new \Exception('Máximo de 7 demonstrativos.');
         }
         $this->descricaoDemonstrativo = $descricaoDemonstrativo;
 
@@ -1008,7 +1008,8 @@ abstract class AbstractBoleto implements BoletoContract
      */
     public function getDescricaoDemonstrativo()
     {
-        return array_slice((array)$this->descricaoDemonstrativo + [null, null, null, null, null], 0, 5);
+        return array_slice((array)$this->descricaoDemonstrativo + [null, null, null, null, null,  null,  null], 0, 7);
+
     }
 
     /**
