@@ -4,7 +4,11 @@
     @foreach($boletos as $i => $boleto)
         @php extract($boleto, EXTR_OVERWRITE); @endphp
         @if($mostrar_instrucoes)
-       
+        <tr>
+            <td colspan="5" class="notopborder bottomborder">
+                <div style="margin-bottom: 10px;" class="conteudo">{{ $demonstrativo[5] }}</div>
+            </td>
+        </tr>
             <div class="noprint info">
                 <h2>Instruções de Impressão</h2>
                 <ul>
@@ -24,8 +28,7 @@
                         <li>Caso não apareça o código de barras no final, pressione F5 para atualizar esta tela.</li>
                         <li>Caso tenha problemas ao imprimir, copie a sequencia numérica abaixo e pague no caixa
                             eletrônico ou no internet banking:
-                        </li>
-                        
+                        </li>        
                     @endforelse
                 </ul>
                 <span class="header" style="white-space: nowrap;">Linha Digitável: {{ $linha_digitavel }}</span>
@@ -36,7 +39,6 @@
                 <br>
             </div>
         @endif
-
         <div class="linha-pontilhada" style="margin-bottom: 20px;">Recibo do pagador</div>
 
         <div class="info-empresa">
