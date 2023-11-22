@@ -6,7 +6,7 @@
         @if($mostrar_instrucoes)
         <tr>
             <td colspan="5" class="notopborder bottomborder">
-                <div style="margin-bottom: 10px;" class="conteudo">{{ $demonstrativo[5] }}</div>
+                <div style="margin-bottom: 10px;" class="conteudo">{{ $demonstrativo[4] }}</div>
             </td>
         </tr>
             <div class="noprint info">
